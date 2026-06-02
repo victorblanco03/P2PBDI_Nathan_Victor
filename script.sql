@@ -61,3 +61,23 @@ END;
 $$;
 
 CALL sp_aprovados_pais_phd();
+
+
+--3 Resultado em função dos estudos
+
+CREATE OR REPLACE PROCEDURE sp_aprovados_estudam_sozinho
+(OUT total_aprovados INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    SELECT COUNT(*)
+    INTO total_aprovados
+    FROM student_prediction
+    WHERE prep_study = 1
+      AND grade >= 1;
+
+END;
+$$;vado
+
+CALL sp_aprovados_estudam_sozinho();
