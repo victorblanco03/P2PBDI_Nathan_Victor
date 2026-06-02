@@ -78,6 +78,29 @@ BEGIN
       AND grade >= 1;
 
 END;
-$$;vado
+$$;
 
 CALL sp_aprovados_estudam_sozinho();
+
+
+-- 4 - Dentre os alunos que têm salário maior que 410, quantos costumam se preparar com
+frequência (regularmente) para os exames? Escreva um stored procedure que exibe esse
+valor.
+
+
+CREATE OR REPLACE PROCEDURE sp_salario_estudos()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_total INT;
+BEGIN
+
+    SELECT COUNT(*)
+    INTO v_total
+    FROM student_prediction
+    WHERE salary = 5
+      AND prep_exam = 2;
+
+    RAISE NOTICE 'Total de alunos: %', v_total;
+
+	CALL sp_salario_estudos();
