@@ -36,3 +36,28 @@ CREATE TABLE student_prediction(
     course_id INT,
     grade INT
 );
+
+
+-- 2 Resultado em função da formação dos pais
+
+
+CREATE OR REPLACE PROCEDURE sp_aprovados_pais_phd()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_total INT;
+BEGIN
+
+    SELECT COUNT(*)
+    INTO v_total
+    FROM student_prediction
+    WHERE mother_edu = 6
+      AND father_edu = 6
+      AND grade >= 4;
+
+    RAISE NOTICE 'Total de aprovados com pais PhD: %', v_total;
+
+END;
+$$;
+
+CALL sp_aprovados_pais_phd();
